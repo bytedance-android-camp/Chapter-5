@@ -1,9 +1,17 @@
-body:after {
+.reveal .brand {
+    position: fixed;
+    width: 10%;
+    height: auto;
+    bottom: 3%;
+    left: 3%;
+}
+
+/* body:after {                                                                
     content: url(../assets/bd_brand.png);
     position: fixed;
-    bottom: 2em;
-    left: 2em;
-}
+    bottom: 1em;
+    left: 1em;
+} */
 
 .reveal section img {
     margin: 5px 0px;
@@ -27,4 +35,10 @@ body:after {
   text-transform: none;
   text-shadow: none;
   word-wrap: break-word; 
+}
+
+.reveal pre {
+  width: 100%;
+  line-height: 1.2;
+  font-size: 0.5em;
 }

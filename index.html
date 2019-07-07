@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Android Network</title>
 
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/reveal.css">
@@ -40,8 +40,8 @@
 						+ HTTP / RESTful API
 						+ Data-interchange formats
 					+ Android Practice
-						+ Fetch Data
 						+ Parse JSON
+						+ Fetch Data
 				</section>
 				<section>
 					<section data-background-video="assets/Ralph.mp4">
@@ -160,9 +160,9 @@
 					<section data-markdown>
 						## Data-interchange formats
 						Try to represent user info:
-						+ name: Alice
-						+ age: 20
-						+ languages: zh/en
+						+ name(Alice)
+						+ age(20)
+						+ languages(zh,en)
 					</section>
 					<section data-markdown>
 						JSON vs XML
@@ -203,36 +203,117 @@
 						}
 						```
 					</section>
-					<section data-markdown>
-						JSON quick text
-						+ name: Alice
-						+ age: 20
-						+ languages: zh/en
+					<section data-markdown data-background-iframe="https://www.json.cn/" data-background-interactive>
+						<script type="text/template">
+							## JSON Practice <!-- .element: style="color: #244fb380" -->
+							+ id(102381) <!-- .element: style="color: #244fb380" -->
+							+ title(Fireworks) <!-- .element: style="color: #244fb380" -->
+							+ author(name(Luna) country(China)) <!-- .element: style="color: #244fb380" -->
+							+ url(http:\/\/x.c\/video\/102381.mp4) <!-- .element: style="color: #244fb380" -->
+							+ like_count(200) <!-- .element: style="color: #244fb380" -->
+							+ tags(Art,VLog) <!-- .element: style="color: #244fb380" -->
+						</script>
 					</section>
-					<section>
-						<a href="https://www.json.cn/">JSON CN</a>
-						<iframe data-src="https://www.json.cn/" width="100%" height="500"></iframe>
-					</section>
-				</section>
-				<section data-markdown>
-					## Markdown support
-				  
-					Write content using inline or external Markdown.
-					Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
 				</section>
 				<section>
-					<section>
-						<p class="fragment">xxxx</p>
-						<p class="fragment">yyyy</p>
-						<p class="fragment">zzzz</p>
+					<section data-markdown>
+						## Parse JSON
+						+ JSONObject
+						+ Gson
 					</section>
-					<section>
-						YY
+					<section data-markdown>
+						## JSONObject
+						[Doc](https://developer.android.com/reference/org/json/JSONObject)
+						```java
+						public static String DATA = "{\"name\":\"Sylvia\",\"age\":26}";
+
+						JSONObject user = new JSONObject(DATA);
+						String name = user.getString("name");
+						int age = user.getString("age");
+						```
+					</section>
+					<section data-markdown>
+						## Gson
+						[Github](https://github.com/google/gson)
+						```java
+						public static String DATA = "{\"name\":\"Sylvia\",\"age\":26}";
+
+						public class User {
+							@SerializedName("name")
+							public String name;
+
+							@SerializedName("age")
+							public int age;
+						}
+
+						User user = new Gson().fromJson(DATA, User.class);
+						String result = user.name;
+						int age = user.age;
+						```
 					</section>
 				</section>
-				<section data-background-video="assets/Ralph.mp4">
+				<section>
+					<section data-markdown>
+						## Fetch Data
+						+ HttpUrlConnection
+						+ Retrofit
+					</section>
+					<section data-markdown>
+						## Permissions
+						```
+						&lt;manifest xmlns:tools="http://schemas.android.com/tools"  
+							package="com.bytedance.android.lesson.restapi"
+							xmlns:android="http://schemas.android.com/apk/res/android"&gt;
+
+							&lt;uses-permission android:name="android.permission.INTERNET" /&gt;
+							&lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /&gt;
+						
+							&lt;application&gt;
+							...   
+							&lt;/application&gt;
+
+						&lt;/manifest&gt;
+						```
+					</section>
+					<section data-markdown>
+						## HttpUrlConnection
+						[Doc](https://developer.android.com/reference/java/net/HttpURLConnection)
+						```java
+						String url = "https://api.thecatapi.com/v1/images/search";
+						
+						// connect
+						URL netUrl = new URL(url);
+						HttpURLConnection urlConnection = (HttpURLConnection) netUrl.openConnection();
+						
+						// read response data
+						BufferedInputStream in = new BufferedInputStream(urlConnection.getInputStream());
+						String data = readStream(in);
+
+						// clean up
+						urlConnection.disconnect();
+						```
+					</section>
+					<section data-markdown>
+						## Retrofit
+						[Github](https://square.github.io/retrofit/)
+						```java
+						// definition
+						public interface ICNDBService {
+							@GET("jokes/random") Call<Joke> randomJoke();
+						}
+
+						Retrofit retrofit = new Retrofit.Builder()
+								.baseUrl("http://api.icndb.com/")
+								.addConverterFactory(GsonConverterFactory.create())
+								.build();
+						ICNDBService service = retrofit.create(ICNDBService.class);
+						Response<Joke> response = service.randomJoke().execute();
+						Joke joke = response == null ? null : response.body();
+						```
+					</section>
 				</section>
 			</div>
+			<img class="brand" src="assets/bd_brand.png" />
 		</div>
 
 		<script src="js/reveal.js"></script>

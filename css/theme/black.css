@@ -14,15 +14,6 @@ body {
   background: #191919;
   background-color: #191919; }
 
-body:after {
-  content: url(../assets/bd_brand.png);
-  position: fixed;
-  bottom: 3.5em;
-  left: 3.5em;
-  width: 20px;
-  height: auto;
-}
-
 .reveal {
   font-family: "Source Sans Pro", Helvetica, sans-serif;
   font-size: 42px;
