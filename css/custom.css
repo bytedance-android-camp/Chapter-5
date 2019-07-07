@@ -1,0 +1,30 @@
+body:after {
+    content: url(../assets/bd_brand.png);
+    position: fixed;
+    bottom: 2em;
+    left: 2em;
+}
+
+.reveal section img {
+    margin: 5px 0px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  margin: 0 0 10px 0;
+  color: #fff;
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-transform: none;
+  text-shadow: none;
+  word-wrap: break-word; 
+}

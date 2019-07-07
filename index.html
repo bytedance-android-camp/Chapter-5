@@ -1,0 +1,256 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/custom.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown>
+					# Surfing on Android
+				  
+					> Bytedance Android Engineer 
+					hejinhai@bytedance.com
+				
+				</section>
+				<section data-markdown>
+					## Points
+					+ Web Basics
+						+ Internet
+						+ HTTP / RESTful API
+						+ Data-interchange formats
+					+ Android Practice
+						+ Fetch Data
+						+ Parse JSON
+				</section>
+				<section>
+					<section data-background-video="assets/Ralph.mp4">
+					</section>
+					<section data-background="#999999">
+						<h2>Internet (Cloud)</h2>
+						<img src="assets/topo.png" />
+					</section>
+					<section data-background="#999999">
+						<h2>Web Service (C/S)</h2>
+						<img src="assets/cs_arch.png" />
+					</section>
+				</section>
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## HTTP
+							The Hypertext Transfer Protocol ([Wiki](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol))
+							+ Standard <!-- .element: class="fragment highlight-current-blue" data-fragment-index="1" -->
+								
+								besides sys(brower/app) <!-- .element: class="fragment highlight-current-blue" data-fragment-index="1" -->
+							+ Application layer <!-- .element: class="fragment highlight-current-blue" data-fragment-index="2" -->
+							
+								easy to use <!-- .element: class="fragment highlight-current-blue" data-fragment-index="2" -->
+							
+							+ URL: Uniform Resource Locator <!-- .element: class="fragment highlight-current-blue" data-fragment-index="3" -->
+							+ Request/Response(C/S Model) <!-- .element: class="fragment highlight-current-blue" data-fragment-index="4" -->				
+						</script>
+					</section>
+					<section>
+						<h3>Network Layers</h3>
+						<img class="fragment" src="assets/network_layers.png" />
+					</section>
+					<section>
+						<h2>URL</h2>
+						Uniform Resource Locator 
+						<img class="fragment" src="assets/url_1.png" />
+						<img class="fragment" src="assets/url_2.png" />
+					</section>
+					<section data-markdown>
+						## Request/Response
+
+						Client request
+						```
+						GET / HTTP/1.1
+						Host: www.example.com
+						```
+
+						Server response
+						```
+						HTTP/1.1 200 OK
+						Date: Mon, 23 May 2005 22:38:34 GMT
+						Content-Type: text/json; charset=UTF-8
+						Content-Length: 138
+						Last-Modified: Wed, 08 Jan 2003 23:11:55 GMT
+						Server: Apache/1.3.3.7 (Unix) (Red-Hat/Linux)
+						ETag: "3f80f-1b6-3e1cb03b"
+
+						{"message": "hello"}
+						```
+					</section>
+				</section>
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## REST
+							REpresentational State Transfer 
+
+							
+							1. Resources <!-- .element: class="fragment highlight-current-blue" data-fragment-index="1" -->
+							
+								web entity(text/music/picture/video) <!-- .element: class="fragment highlight-current-blue" data-fragment-index="1" -->
+							
+							2. Representation <!-- .element: class="fragment highlight-current-blue" data-fragment-index="2" -->
+								
+								type/format(html/json/jpg) <!-- .element: class="fragment highlight-current-blue" data-fragment-index="2" -->
+							
+							3. State Transfer <!-- .element: class="fragment highlight-current-blue" data-fragment-index="3" -->
+								
+								methods(POST/GET/PUT/DELETE) <!-- .element: class="fragment highlight-current-blue" data-fragment-index="3" -->
+						</script>
+					</section>
+					<section>
+						<h3>REST Methods</h3>
+						<img src="assets/http_methods.png" />
+					</section>
+					<section data-markdown>
+						## REST Methods example
+
+						| Method                       | http://x.c/video/  | http://x.c/video/123  |
+						| ---------------------------- | ------------- | ----- |
+						| GET   | get all videos | get video 123 |
+						| POST | post video      |   - |
+						| PUT | -      |   update video 123|
+						| DELETE | delete all videos      |   delete video 123 |
+					</section>
+					<section data-markdown>
+						## REST Documents
+						+ [REST Wiki](https://en.wikipedia.org/wiki/Representational_state_transfer)
+						+ [REST API Tutorial](https://restfulapi.net/)
+						+ [理解RESTful架构](http://www.ruanyifeng.com/blog/2011/09/restful.html)
+						+ [PostMan](https://www.getpostman.com/)
+						+ [The Cat API](https://docs.thecatapi.com/)
+						+ [Github API](https://developer.github.com/v3/)
+					</section>
+					<section>
+						<a href="https://docs.thecatapi.com/api-reference/images/images-search">The Cat API</a>
+						<iframe data-src="https://docs.thecatapi.com/api-reference/images/images-search" width="100%" height="500"></iframe>
+					</section>
+					<section>
+						<a href="https://developer.github.com/v3/">Github API</a>
+						<iframe data-src="https://developer.github.com/v3/" width="100%" height="500"></iframe>
+					</section>
+				</section>
+				<section>
+					<section data-markdown>
+						## Data-interchange formats
+						Try to represent user info:
+						+ name: Alice
+						+ age: 20
+						+ languages: zh/en
+					</section>
+					<section data-markdown>
+						JSON vs XML
+
+						```json
+						// JSON - JavaScript Object Notation
+						{
+							"name": "Alice",
+							"age": 20,
+							"languages": ["zh", "en"]
+						}
+						```
+
+						```XML
+						&lt;xml&gt;&lt;!-- XML - Extensible Markup Language--&gt;
+							&lt;name&gt;Alice&lt;/name&gt;
+							&lt;age&gt;20&lt;/age&gt;
+							&lt;languages&gt;
+								&lt;language&gt;zh&lt;/language&gt;
+								&lt;language&gt;en&lt;/language&gt;
+							&lt;/languages&gt;
+						&lt;/xml&gt;
+						```
+					</section>
+					<section data-markdown>
+						JSON data types
+						```json
+						{
+							"string_name": "Alice",
+							"number_age": 20,
+							"boolean_vip": true,
+							"array_languages": ["zh", "en"],
+							"object_school": {
+								"name": "Zhejiang University",
+								"city": "Hangzhou"
+							},
+							"null_email": null
+						}
+						```
+					</section>
+					<section data-markdown>
+						JSON quick text
+						+ name: Alice
+						+ age: 20
+						+ languages: zh/en
+					</section>
+					<section>
+						<a href="https://www.json.cn/">JSON CN</a>
+						<iframe data-src="https://www.json.cn/" width="100%" height="500"></iframe>
+					</section>
+				</section>
+				<section data-markdown>
+					## Markdown support
+				  
+					Write content using inline or external Markdown.
+					Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
+				</section>
+				<section>
+					<section>
+						<p class="fragment">xxxx</p>
+						<p class="fragment">yyyy</p>
+						<p class="fragment">zzzz</p>
+					</section>
+					<section>
+						YY
+					</section>
+				</section>
+				<section data-background-video="assets/Ralph.mp4">
+				</section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				preloadIframes: true,
+				pdfSeparateFragments: false,
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
