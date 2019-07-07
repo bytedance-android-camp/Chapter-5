@@ -1,0 +1,44 @@
+.reveal .brand {
+    position: fixed;
+    width: 10%;
+    height: auto;
+    bottom: 3%;
+    left: 3%;
+}
+
+/* body:after {                                                                
+    content: url(../assets/bd_brand.png);
+    position: fixed;
+    bottom: 1em;
+    left: 1em;
+} */
+
+.reveal section img {
+    margin: 5px 0px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  margin: 0 0 10px 0;
+  color: #fff;
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-transform: none;
+  text-shadow: none;
+  word-wrap: break-word; 
+}
+
+.reveal pre {
+  width: 100%;
+  line-height: 1.2;
+  font-size: 0.5em;
+}

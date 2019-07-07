@@ -1,0 +1,337 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Android Network</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/custom.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown>
+					# Surfing on Android
+				  
+					> Bytedance Android Engineer 
+					hejinhai@bytedance.com
+				
+				</section>
+				<section data-markdown>
+					## Points
+					+ Web Basics
+						+ Internet
+						+ HTTP / RESTful API
+						+ Data-interchange formats
+					+ Android Practice
+						+ Parse JSON
+						+ Fetch Data
+				</section>
+				<section>
+					<section data-background-video="assets/Ralph.mp4">
+					</section>
+					<section data-background="#999999">
+						<h2>Internet (Cloud)</h2>
+						<img src="assets/topo.png" />
+					</section>
+					<section data-background="#999999">
+						<h2>Web Service (C/S)</h2>
+						<img src="assets/cs_arch.png" />
+					</section>
+				</section>
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## HTTP
+							The Hypertext Transfer Protocol ([Wiki](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol))
+							+ Standard <!-- .element: class="fragment highlight-current-blue" data-fragment-index="1" -->
+								
+								besides sys(brower/app) <!-- .element: class="fragment highlight-current-blue" data-fragment-index="1" -->
+							+ Application layer <!-- .element: class="fragment highlight-current-blue" data-fragment-index="2" -->
+							
+								easy to use <!-- .element: class="fragment highlight-current-blue" data-fragment-index="2" -->
+							
+							+ URL: Uniform Resource Locator <!-- .element: class="fragment highlight-current-blue" data-fragment-index="3" -->
+							+ Request/Response(C/S Model) <!-- .element: class="fragment highlight-current-blue" data-fragment-index="4" -->				
+						</script>
+					</section>
+					<section>
+						<h3>Network Layers</h3>
+						<img class="fragment" src="assets/network_layers.png" />
+					</section>
+					<section>
+						<h2>URL</h2>
+						Uniform Resource Locator 
+						<img class="fragment" src="assets/url_1.png" />
+						<img class="fragment" src="assets/url_2.png" />
+					</section>
+					<section data-markdown>
+						## Request/Response
+
+						Client request
+						```
+						GET / HTTP/1.1
+						Host: www.example.com
+						```
+
+						Server response
+						```
+						HTTP/1.1 200 OK
+						Date: Mon, 23 May 2005 22:38:34 GMT
+						Content-Type: text/json; charset=UTF-8
+						Content-Length: 138
+						Last-Modified: Wed, 08 Jan 2003 23:11:55 GMT
+						Server: Apache/1.3.3.7 (Unix) (Red-Hat/Linux)
+						ETag: "3f80f-1b6-3e1cb03b"
+
+						{"message": "hello"}
+						```
+					</section>
+				</section>
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## REST
+							REpresentational State Transfer 
+
+							
+							1. Resources <!-- .element: class="fragment highlight-current-blue" data-fragment-index="1" -->
+							
+								web entity(text/music/picture/video) <!-- .element: class="fragment highlight-current-blue" data-fragment-index="1" -->
+							
+							2. Representation <!-- .element: class="fragment highlight-current-blue" data-fragment-index="2" -->
+								
+								type/format(html/json/jpg) <!-- .element: class="fragment highlight-current-blue" data-fragment-index="2" -->
+							
+							3. State Transfer <!-- .element: class="fragment highlight-current-blue" data-fragment-index="3" -->
+								
+								methods(POST/GET/PUT/DELETE) <!-- .element: class="fragment highlight-current-blue" data-fragment-index="3" -->
+						</script>
+					</section>
+					<section>
+						<h3>REST Methods</h3>
+						<img src="assets/http_methods.png" />
+					</section>
+					<section data-markdown>
+						## REST Methods example
+
+						| Method                       | http://x.c/video/  | http://x.c/video/123  |
+						| ---------------------------- | ------------- | ----- |
+						| GET   | get all videos | get video 123 |
+						| POST | post video      |   - |
+						| PUT | -      |   update video 123|
+						| DELETE | delete all videos      |   delete video 123 |
+					</section>
+					<section data-markdown>
+						## REST Documents
+						+ [REST Wiki](https://en.wikipedia.org/wiki/Representational_state_transfer)
+						+ [REST API Tutorial](https://restfulapi.net/)
+						+ [理解RESTful架构](http://www.ruanyifeng.com/blog/2011/09/restful.html)
+						+ [PostMan](https://www.getpostman.com/)
+						+ [The Cat API](https://docs.thecatapi.com/)
+						+ [Github API](https://developer.github.com/v3/)
+					</section>
+					<section>
+						<a href="https://docs.thecatapi.com/api-reference/images/images-search">The Cat API</a>
+						<iframe data-src="https://docs.thecatapi.com/api-reference/images/images-search" width="100%" height="500"></iframe>
+					</section>
+					<section>
+						<a href="https://developer.github.com/v3/">Github API</a>
+						<iframe data-src="https://developer.github.com/v3/" width="100%" height="500"></iframe>
+					</section>
+				</section>
+				<section>
+					<section data-markdown>
+						## Data-interchange formats
+						Try to represent user info:
+						+ name(Alice)
+						+ age(20)
+						+ languages(zh,en)
+					</section>
+					<section data-markdown>
+						JSON vs XML
+
+						```json
+						// JSON - JavaScript Object Notation
+						{
+							"name": "Alice",
+							"age": 20,
+							"languages": ["zh", "en"]
+						}
+						```
+
+						```XML
+						&lt;xml&gt;&lt;!-- XML - Extensible Markup Language--&gt;
+							&lt;name&gt;Alice&lt;/name&gt;
+							&lt;age&gt;20&lt;/age&gt;
+							&lt;languages&gt;
+								&lt;language&gt;zh&lt;/language&gt;
+								&lt;language&gt;en&lt;/language&gt;
+							&lt;/languages&gt;
+						&lt;/xml&gt;
+						```
+					</section>
+					<section data-markdown>
+						JSON data types
+						```json
+						{
+							"string_name": "Alice",
+							"number_age": 20,
+							"boolean_vip": true,
+							"array_languages": ["zh", "en"],
+							"object_school": {
+								"name": "Zhejiang University",
+								"city": "Hangzhou"
+							},
+							"null_email": null
+						}
+						```
+					</section>
+					<section data-markdown data-background-iframe="https://www.json.cn/" data-background-interactive>
+						<script type="text/template">
+							## JSON Practice <!-- .element: style="color: #244fb380" -->
+							+ id(102381) <!-- .element: style="color: #244fb380" -->
+							+ title(Fireworks) <!-- .element: style="color: #244fb380" -->
+							+ author(name(Luna) country(China)) <!-- .element: style="color: #244fb380" -->
+							+ url(http:\/\/x.c\/video\/102381.mp4) <!-- .element: style="color: #244fb380" -->
+							+ like_count(200) <!-- .element: style="color: #244fb380" -->
+							+ tags(Art,VLog) <!-- .element: style="color: #244fb380" -->
+						</script>
+					</section>
+				</section>
+				<section>
+					<section data-markdown>
+						## Parse JSON
+						+ JSONObject
+						+ Gson
+					</section>
+					<section data-markdown>
+						## JSONObject
+						[Doc](https://developer.android.com/reference/org/json/JSONObject)
+						```java
+						public static String DATA = "{\"name\":\"Sylvia\",\"age\":26}";
+
+						JSONObject user = new JSONObject(DATA);
+						String name = user.getString("name");
+						int age = user.getString("age");
+						```
+					</section>
+					<section data-markdown>
+						## Gson
+						[Github](https://github.com/google/gson)
+						```java
+						public static String DATA = "{\"name\":\"Sylvia\",\"age\":26}";
+
+						public class User {
+							@SerializedName("name")
+							public String name;
+
+							@SerializedName("age")
+							public int age;
+						}
+
+						User user = new Gson().fromJson(DATA, User.class);
+						String result = user.name;
+						int age = user.age;
+						```
+					</section>
+				</section>
+				<section>
+					<section data-markdown>
+						## Fetch Data
+						+ HttpUrlConnection
+						+ Retrofit
+					</section>
+					<section data-markdown>
+						## Permissions
+						```
+						&lt;manifest xmlns:tools="http://schemas.android.com/tools"  
+							package="com.bytedance.android.lesson.restapi"
+							xmlns:android="http://schemas.android.com/apk/res/android"&gt;
+
+							&lt;uses-permission android:name="android.permission.INTERNET" /&gt;
+							&lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /&gt;
+						
+							&lt;application&gt;
+							...   
+							&lt;/application&gt;
+
+						&lt;/manifest&gt;
+						```
+					</section>
+					<section data-markdown>
+						## HttpUrlConnection
+						[Doc](https://developer.android.com/reference/java/net/HttpURLConnection)
+						```java
+						String url = "https://api.thecatapi.com/v1/images/search";
+						
+						// connect
+						URL netUrl = new URL(url);
+						HttpURLConnection urlConnection = (HttpURLConnection) netUrl.openConnection();
+						
+						// read response data
+						BufferedInputStream in = new BufferedInputStream(urlConnection.getInputStream());
+						String data = readStream(in);
+
+						// clean up
+						urlConnection.disconnect();
+						```
+					</section>
+					<section data-markdown>
+						## Retrofit
+						[Github](https://square.github.io/retrofit/)
+						```java
+						// definition
+						public interface ICNDBService {
+							@GET("jokes/random") Call<Joke> randomJoke();
+						}
+
+						Retrofit retrofit = new Retrofit.Builder()
+								.baseUrl("http://api.icndb.com/")
+								.addConverterFactory(GsonConverterFactory.create())
+								.build();
+						ICNDBService service = retrofit.create(ICNDBService.class);
+						Response<Joke> response = service.randomJoke().execute();
+						Joke joke = response == null ? null : response.body();
+						```
+					</section>
+				</section>
+			</div>
+			<img class="brand" src="assets/bd_brand.png" />
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				preloadIframes: true,
+				pdfSeparateFragments: false,
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
