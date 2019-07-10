@@ -3,11 +3,13 @@ package com.bytedance.androidcamp.network.demo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bytedance.androidcamp.network.demo.model.Cat;
 import com.bytedance.androidcamp.network.demo.newtork.ICatService;
 import com.bytedance.androidcamp.network.demo.utils.NetworkUtils;
+import com.bytedance.androidcamp.network.lib.util.ImageHelper;
 import com.google.gson.Gson;
 import java.util.List;
 import org.json.JSONArray;
@@ -28,37 +30,39 @@ public class MainActivity extends AppCompatActivity {
     private ICatService catService;
     private Gson gson;
 
-    public TextView mTv;
+    public TextView tvOut;
+    public ImageView ivOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mTv = findViewById(R.id.tv);
+        tvOut = findViewById(R.id.tv_out);
+        ivOut = findViewById(R.id.iv_out);
     }
 
     public void testJSONObject(View view) {
         // TODO 1: Parse CAT_JSON using JSONObject
         String id = "";
-        mTv.setText(id);
+        tvOut.setText(id);
     }
 
     public void testGson(View view) {
         // TODO 2: Parse CAT_JSON using Gson
         String url = "";
-        mTv.setText(url);
+        ImageHelper.displayWebImage(url, ivOut);
     }
 
     public void testHttpURLConnectionSync(View view) {
         // TODO 4: Fix crash of NetworkOnMainThreadException
         String s = NetworkUtils.getResponseWithHttpURLConnection(ICatService.HOST + ICatService.PATH);
-        mTv.setText(s);
+        tvOut.setText(s);
     }
 
     public void testRetrofitSync(View view) throws Exception {
         // TODO 5: Making request in retrofit
         Cat cat = null;
-        mTv.setText(cat.toString());
+        tvOut.setText(cat.toString());
     }
 
     public void testUpdateUI(View view) {
@@ -66,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         new Thread() {
             @Override public void run() {
                 final String s = NetworkUtils.getResponseWithHttpURLConnection(ICatService.HOST + ICatService.PATH);
-                mTv.setText(s);
+                tvOut.setText(s);
             }
         }.start();
     }
@@ -83,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            mTv.setText(id);
+                            tvOut.setText(id);
                         }
                     });
                 } catch (JSONException e) {
@@ -101,7 +105,8 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<Cat>> call, Response<List<Cat>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Cat> cats = response.body();
-                    mTv.setText(cats.get(0).getUrl());
+                    Cat cat = cats.get(0);
+                    tvOut.setText(cat.getUrl());
                 }
             }
 

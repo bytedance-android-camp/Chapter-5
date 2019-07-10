@@ -4,10 +4,17 @@
 
 PPT在线版地址[AndroidNetwork](https://bytedance-android-camp.github.io/Chapter-5/)
 
-PPT离线地址 docs/Android Network.pdf
+## 文件夹组织
 
-大作业说明 docs/Android大作业.pdf
+### Practice（作业工程）
++ 课堂演练模块 - demo
++ 课后作业模块 - dou
 
-mini抖音API文档 docs/Mini Douyin API.pdf
+### docs（文档）
++ PPT离线地址 - Android Network.pdf
++ 大作业说明 - Android大作业.pdf
++ mini抖音API文档 - Mini Douyin API.pdf
 
-建议下载工具[PostMan](https://www.getpostman.com/)
+### tools（工具）
++ PostMan安装包
++ The Cat API.postman_collection.json

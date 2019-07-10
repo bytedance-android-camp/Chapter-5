@@ -15,9 +15,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-import com.bumptech.glide.Glide;
 import com.bytedance.androidcamp.network.dou.api.IMiniDouyinService;
 import com.bytedance.androidcamp.network.dou.model.Video;
+import com.bytedance.androidcamp.network.lib.util.ImageHelper;
 import com.bytedance.androidcamp.network.dou.util.ResourceUtils;
 import java.io.File;
 import java.util.ArrayList;
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public void bind(final Activity activity, final Video video) {
-            Glide.with(activity).load(video.getImageUrl()).into(img);
+            ImageHelper.displayWebImage(video.getImageUrl(), img);
             img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
