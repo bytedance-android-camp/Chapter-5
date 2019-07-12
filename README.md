@@ -1,5 +1,5 @@
 # Android Network
-下载作业项目
+请同学们下载作业项目
 `git clone https://github.com/bytedance-android-camp/Chapter-5.git`
 
 PPT在线版地址[AndroidNetwork](https://bytedance-android-camp.github.io/Chapter-5/)
